@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (4.7.2)
+  - MJRefresh (3.1.15.3)
+  - SnapKit (4.0.0)
+  - SVProgressHUD (2.2.5)
+  - SwiftSoup (1.7.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - MJRefresh
+  - SnapKit (~> 4.0.0)
+  - SVProgressHUD
+  - SwiftSoup
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - MJRefresh
+    - SnapKit
+    - SVProgressHUD
+    - SwiftSoup
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
+
+PODFILE CHECKSUM: f814cada026d9257fc3714750554255f5b83d2b3
+
+COCOAPODS: 1.5.3
