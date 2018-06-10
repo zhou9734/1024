@@ -12,6 +12,10 @@ import MJRefresh
 import SVProgressHUD
 import SwiftSoup
 
+protocol NoNetworkProtocal {
+    func reload()
+}
+
 class BlockViewController: UIViewController {
     let blockCellIdentifier = "blockCellIdentifier"
     var blockModels: [BlockModel] = [BlockModel]()
@@ -55,8 +59,8 @@ class BlockViewController: UIViewController {
     @objc fileprivate func loadData(){
         NetworkTool.sharedInstance.getRequest(urlString: url, params: [String: AnyObject]()) { (result,error) in
             if error != nil || result == nil{
-                SVProgressHUD.showError(withStatus: "网络错误")
                 self.tbl.mj_header.endRefreshing()
+                self.showNoNetworkView()
                 return
             }
             self.blockModels = self.getBlockData(response: result!)
@@ -92,8 +96,15 @@ class BlockViewController: UIViewController {
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
-    @objc fileprivate func backFunc(){
-        self.navigationController?.popViewController(animated: true)
+    fileprivate lazy var noNetworkView: UIView = {
+        let v = NoNetworkView(frame: self.view.bounds)
+        v.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
+        v.delege = self
+        return v
+    }()
+    
+    fileprivate func showNoNetworkView(){
+        self.view.addSubview(noNetworkView)
     }
     
     fileprivate func getBlockData(response: String) -> [BlockModel]{
@@ -163,5 +174,10 @@ extension BlockViewController: UITableViewDelegate{
         contentVC.blockModel = cellData
         self.navigationController?.pushViewController(contentVC, animated: true)
     }
-    
+}
+extension BlockViewController: NoNetworkProtocal{
+    func reload() {
+        self.noNetworkView.removeFromSuperview()
+        self.tbl.mj_header.beginRefreshing()
+    }
 }
