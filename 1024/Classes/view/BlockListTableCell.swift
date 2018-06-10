@@ -30,25 +30,26 @@ class BlockListTableCell: UITableViewCell {
     }
     
     fileprivate func setupUI(){
+        self.contentView.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
         self.contentView.addSubview(titleLbl)
         self.contentView.addSubview(createUserLbl)
         self.contentView.addSubview(replyLbl)
         titleLbl.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView.snp.top).offset(5)
+            make.top.equalTo(self.contentView.snp.top).offset(10)
             make.left.equalTo(10)
-            make.right.equalTo(10)
+            make.right.equalTo(-10)
         }
         createUserLbl.snp.makeConstraints { (make) in
             make.top.equalTo(self.titleLbl.snp.bottom).offset(10)
             make.left.equalTo(10)
-            make.bottom.equalTo(self.contentView.snp.bottom)
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-10)
             make.height.equalTo(20)
             make.width.equalTo(width - 20)
         }
         replyLbl.snp.makeConstraints { (make) in
             make.top.equalTo(self.titleLbl.snp.bottom).offset(10)
             make.right.equalTo(self.contentView.snp.right)
-            make.bottom.equalTo(self.contentView.snp.bottom)
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-10)
             make.height.equalTo(20)
             make.width.equalTo(width + 20)
         }
@@ -56,8 +57,8 @@ class BlockListTableCell: UITableViewCell {
     
     fileprivate lazy var titleLbl: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = UIColor.black
-        lbl.font = UIFont.boldSystemFont(ofSize: 16)
+        lbl.textColor = UIColor(displayP3Red: 58/255, green: 76/255, blue: 163/255, alpha: 1)
+        lbl.font = UIFont.systemFont(ofSize: 17)
         lbl.numberOfLines = 0
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -65,15 +66,15 @@ class BlockListTableCell: UITableViewCell {
     
     fileprivate lazy var createUserLbl: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = UIColor.gray
         lbl.font = UIFont.systemFont(ofSize: 13)
         lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = UIColor(displayP3Red: 94/255, green: 94/255, blue: 94/255, alpha: 1)
         return lbl
     }()
     
     fileprivate lazy var replyLbl: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = UIColor.gray
+        lbl.textColor = UIColor(displayP3Red: 94/255, green: 94/255, blue: 94/255, alpha: 1)
         lbl.font = UIFont.systemFont(ofSize: 13)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textAlignment = .right

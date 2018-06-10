@@ -44,6 +44,7 @@ class BlockViewController: UIViewController {
             make.right.equalTo(self.view.snp.right)
             make.bottom.equalTo(self.view.snp.bottom)
         }
+        SVProgressHUD.setDefaultMaskType(.black)
         header.setRefreshingTarget(self, refreshingAction: #selector(self.loadData))
         footer.setRefreshingTarget(self, refreshingAction: #selector(self.loadMore))
         tbl.mj_header = header
@@ -53,6 +54,11 @@ class BlockViewController: UIViewController {
     //下拉刷新
     @objc fileprivate func loadData(){
         NetworkTool.sharedInstance.getRequest(urlString: url, params: [String: AnyObject]()) { (result,error) in
+            if error != nil || result == nil{
+                SVProgressHUD.showError(withStatus: "网络错误")
+                self.tbl.mj_header.endRefreshing()
+                return
+            }
             self.blockModels = self.getBlockData(response: result!)
             self.tbl.reloadData();
             self.tbl.mj_header.endRefreshing()
@@ -63,12 +69,16 @@ class BlockViewController: UIViewController {
     //下拉加载
     @objc fileprivate func loadMore(){
         NetworkTool.sharedInstance.getRequest(urlString: url + "&search=&page=\(page)", params: [String: AnyObject]()) { (result,error) in
+            if error != nil || result == nil{
+                SVProgressHUD.showError(withStatus: "网络错误")
+                self.tbl.mj_footer.endRefreshing()
+            }
             let tmpBlockModels = self.getBlockData(response: result!)
             tmpBlockModels.forEach({ (b) in
                 self.blockModels.append(b)
             })
             self.tbl.reloadData();
-            self.tbl.mj_header.endRefreshing()
+            self.tbl.mj_footer.endRefreshing()
             self.page = self.page + 1
         }
     }
@@ -78,7 +88,7 @@ class BlockViewController: UIViewController {
         tv.register(BlockListTableCell.self, forCellReuseIdentifier: blockCellIdentifier)
         tv.dataSource = self
         tv.delegate = self
-        tv.backgroundColor = UIColor.white
+        tv.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -148,6 +158,10 @@ extension BlockViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //释放选中效果
         tableView.deselectRow(at: indexPath, animated: true)
-        //let cellData = dataCell[indexPath.section][indexPath.row]
+        let cellData = blockModels[indexPath.row]
+        let contentVC = ContentViewController()
+        contentVC.blockModel = cellData
+        self.navigationController?.pushViewController(contentVC, animated: true)
     }
+    
 }

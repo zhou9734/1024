@@ -2,55 +2,45 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    <dict>
-        <key>icon</key>
-        <string>jishutaolun</string>
-        <key>title</key>
-        <string>技術討論區</string>
-        <key>subTitle</key>
-        <string>日常生活 興趣交流 時事經濟 求助求檔 會員閑談吹水區</string>
-        <key>url</key>
-        <string>thread0806.php?fid=7</string>
-    </dict>
-    <dict>
-        <key>icon</key>
-        <string>xinshidaidewomen</string>
-        <key>title</key>
-        <string>新時代的我們</string>
-        <key>subTitle</key>
-        <string>草榴貼圖區 加大你的帶寬! 加大你的內存! 加大你的顯示器!</string>
-        <key>url</key>
-        <string>thread0806.php?fid=8</string>
-    </dict>
-    <dict>
-        <key>icon</key>
-        <string>dagaier</string>
-        <key>title</key>
-        <string>達蓋爾的旗幟</string>
-        <key>subTitle</key>
-        <string>草榴自拍區 分享你我光圈下的最美</string>
-        <key>url</key>
-        <string>thread0806.php?fid=16</string>
-    </dict>
-    <dict>
-        <key>icon</key>
-        <string>chengrenwenxue</string>
-        <key>title</key>
-        <string>成人文學交流區</string>
-        <key>subTitle</key>
-        <string>草榴文學區 歡迎各位發表</string>
-        <key>url</key>
-        <string>thread0806.php?fid=20</string>
-    </dict>
-    <dict>
-        <key>icon</key>
-        <string>clnews</string>
-        <key>title</key>
-        <string>草榴資訊</string>
-        <key>subTitle</key>
-        <string>公告有關本站最新動向 會員須知 請經常來看看</string>
-        <key>url</key>
-        <string>thread0806.php?fid=9</string>
-    </dict>
+	<dict>
+		<key>icon</key>
+		<string>jishutaolun</string>
+		<key>title</key>
+		<string>技術討論區</string>
+		<key>subTitle</key>
+		<string>日常生活 興趣交流 時事經濟 求助求檔 會員閑談吹水區</string>
+		<key>url</key>
+		<string>thread0806.php?fid=7</string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>xinshidaidewomen</string>
+		<key>title</key>
+		<string>新時代的我們</string>
+		<key>subTitle</key>
+		<string>草榴貼圖區 加大你的帶寬! 加大你的內存! 加大你的顯示器!</string>
+		<key>url</key>
+		<string>thread0806.php?fid=8</string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>dagaier</string>
+		<key>title</key>
+		<string>達蓋爾的旗幟</string>
+		<key>subTitle</key>
+		<string>草榴自拍區 分享你我光圈下的最美</string>
+		<key>url</key>
+		<string>thread0806.php?fid=16</string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>chengrenwenxue</string>
+		<key>title</key>
+		<string>成人文學交流區</string>
+		<key>subTitle</key>
+		<string>草榴文學區 歡迎各位發表</string>
+		<key>url</key>
+		<string>thread0806.php?fid=20</string>
+	</dict>
 </array>
 </plist>

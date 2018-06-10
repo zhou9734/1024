@@ -14,6 +14,7 @@
 		F99116A220C0902C00E159DB /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99116A120C0902C00E159DB /* BlockViewController.swift */; };
 		F99116A420C090CC00E159DB /* BlockListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99116A320C090CC00E159DB /* BlockListTableCell.swift */; };
 		F99116A620C09F6B00E159DB /* BlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99116A520C09F6B00E159DB /* BlockModel.swift */; };
+		F994C60520C9BF5E000424AA /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F994C60420C9BF5E000424AA /* ContentViewController.swift */; };
 		F9A3732920C483E80000D873 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3732820C483E80000D873 /* NetworkTool.swift */; };
 		F9A3732C20C4964C0000D873 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3732B20C4964C0000D873 /* String+Extension.swift */; };
 		F9A6860720BDE0B1008CA1B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6860620BDE0B1008CA1B4 /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 		F99116A320C090CC00E159DB /* BlockListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableCell.swift; sourceTree = "<group>"; };
 		F99116A520C09F6B00E159DB /* BlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockModel.swift; sourceTree = "<group>"; };
 		F99116A920C0AF8100E159DB /* 1024-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "1024-Bridging-Header.h"; sourceTree = "<group>"; };
+		F994C60420C9BF5E000424AA /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		F9A3732820C483E80000D873 /* NetworkTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
 		F9A3732B20C4964C0000D873 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		F9A6860320BDE0B1008CA1B4 /* 1024.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 1024.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,16 @@
 				911DA4960CD1CB34B5F3B6DE /* Pods-1024.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F994C60320C9BEED000424AA /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9A6860820BDE0B1008CA1B4 /* MainViewController.swift */,
+				F99116A120C0902C00E159DB /* BlockViewController.swift */,
+				F994C60420C9BF5E000424AA /* ContentViewController.swift */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 		F9A3732A20C496370000D873 /* Extension */ = {
@@ -120,11 +132,10 @@
 		F9A6861820BDE79D008CA1B4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F994C60320C9BEED000424AA /* controller */,
 				F9A6861F20BDFCBC008CA1B4 /* view */,
 				F9A6861C20BDFA04008CA1B4 /* model */,
 				F9A6861920BDE7D1008CA1B4 /* tools */,
-				F9A6860820BDE0B1008CA1B4 /* MainViewController.swift */,
-				F99116A120C0902C00E159DB /* BlockViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -288,6 +299,7 @@
 				F9A6860720BDE0B1008CA1B4 /* AppDelegate.swift in Sources */,
 				F99116A220C0902C00E159DB /* BlockViewController.swift in Sources */,
 				F9A6861B20BDE7F4008CA1B4 /* CommonTools.swift in Sources */,
+				F994C60520C9BF5E000424AA /* ContentViewController.swift in Sources */,
 				F9A3732C20C4964C0000D873 /* String+Extension.swift in Sources */,
 				F99116A620C09F6B00E159DB /* BlockModel.swift in Sources */,
 			);

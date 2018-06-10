@@ -26,7 +26,7 @@ class MainViewController: UIViewController{
     }
     
     fileprivate func setupUI() {
-        self.title = "1024"
+        self.title = "草榴社區"
         self.view.addSubview(tbl)
         tbl.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top)
@@ -89,7 +89,6 @@ extension MainViewController: UITableViewDelegate{
         let blockVC = BlockViewController()
         blockVC.confiModel = cellData
         self.navigationController?.pushViewController(blockVC, animated: true)
-        
     }
 }
 

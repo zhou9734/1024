@@ -63,7 +63,7 @@ class MainTableCell: UITableViewCell {
     fileprivate lazy var titleLbl: UILabel = {
         let lbl = UILabel()
         lbl.textColor = UIColor.black
-        lbl.font = UIFont.boldSystemFont(ofSize: 18)
+        lbl.font = UIFont.systemFont(ofSize: 17)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
