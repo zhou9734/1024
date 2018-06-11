@@ -23,6 +23,7 @@
 		F9A6861B20BDE7F4008CA1B4 /* CommonTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6861A20BDE7F4008CA1B4 /* CommonTools.swift */; };
 		F9A6861E20BDFA90008CA1B4 /* ConfModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6861D20BDFA90008CA1B4 /* ConfModel.swift */; };
 		F9A6862120BDFCEB008CA1B4 /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6862020BDFCEB008CA1B4 /* MainTableCell.swift */; };
+		F9FFE78520CD53BC00B44211 /* NoNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFE78420CD53BC00B44211 /* NoNetworkView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		F9A6861A20BDE7F4008CA1B4 /* CommonTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTools.swift; sourceTree = "<group>"; };
 		F9A6861D20BDFA90008CA1B4 /* ConfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfModel.swift; sourceTree = "<group>"; };
 		F9A6862020BDFCEB008CA1B4 /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
+		F9FFE78420CD53BC00B44211 /* NoNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			children = (
 				F9A6862020BDFCEB008CA1B4 /* MainTableCell.swift */,
 				F99116A320C090CC00E159DB /* BlockListTableCell.swift */,
+				F9FFE78420CD53BC00B44211 /* NoNetworkView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A6862120BDFCEB008CA1B4 /* MainTableCell.swift in Sources */,
+				F9FFE78520CD53BC00B44211 /* NoNetworkView.swift in Sources */,
 				F9A3732920C483E80000D873 /* NetworkTool.swift in Sources */,
 				F9A6860920BDE0B1008CA1B4 /* MainViewController.swift in Sources */,
 				F99116A420C090CC00E159DB /* BlockListTableCell.swift in Sources */,

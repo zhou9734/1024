@@ -26,7 +26,13 @@ class NetworkTool: NSObject {
     //发送get请求
     func getRequest(urlString: String, params : [String : Any], finished : @escaping (_ response : String?,_ error:Error?)->()) {
         let urlStr = rootUrl + urlString
-        NetworkTool.sharedSessionManager.request(urlStr).response { response in // method defaults to `.get`
+        getRequest(urlString: urlStr) { (response, error) in
+            finished(response,error)
+        }
+    }
+    
+    func getRequest(urlString: String, finished : @escaping (_ response : String?,_ error:Error?)->()) {
+        NetworkTool.sharedSessionManager.request(urlString).response { response in // method defaults to `.get`
             if response.error != nil{
                 finished(nil, response.error)
             }else{
@@ -39,16 +45,5 @@ class NetworkTool: NSObject {
                 }
             }
         }
-//        do{
-//            let urlStr = rootUrl + urlString
-//            let url = URL(string: urlStr)!
-//            let data = try Data(contentsOf: url)
-//            let enc = CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.GB_18030_2000.rawValue))
-//            let str : String = NSString(data: data, encoding: enc)! as String
-//            finished(str, nil)
-//        }catch{
-//            finished(nil, error)
-//            CJLog(message: error)
-//        }
     }
 }

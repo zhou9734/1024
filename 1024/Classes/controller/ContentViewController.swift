@@ -11,6 +11,7 @@ import SnapKit
 import SVProgressHUD
 import SwiftSoup
 import WebKit
+import MJRefresh
 
 class ContentViewController: UIViewController {
     let screenWidth = UIScreen.main.bounds.width
@@ -47,22 +48,28 @@ class ContentViewController: UIViewController {
         wv.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
         return wv
     }()
+    
     //获取页面数据
     fileprivate func getPageData(urlStr: String) {
+        SVProgressHUD.show()
         NetworkTool.sharedInstance.getRequest(urlString: urlStr, params: [String: AnyObject]()) { (result,error) in
             if error != nil || result == nil{
-                SVProgressHUD.showError(withStatus: "网络错误")
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: "网络错误,请重新打开")
                 return
             }
             let doc: Document = try! SwiftSoup.parse(result!)
             var containerDivStr = try! doc.select("div[class=tpc_content do_not_catch]").html()
             if "" == containerDivStr{
+                SVProgressHUD.dismiss()
                 SVProgressHUD.showError(withStatus: "网络错误,请重新打开")
                 return
             }
             containerDivStr = containerDivStr.replacingOccurrences(of: "data-src", with: "src")
             containerDivStr = self.header + containerDivStr + "</div>" + self.footer
             self.containerWV.loadHTMLString(containerDivStr, baseURL: nil)
+            SVProgressHUD.dismiss()
         }
     }
 }
+

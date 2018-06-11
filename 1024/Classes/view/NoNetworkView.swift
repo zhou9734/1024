@@ -17,7 +17,7 @@ class NoNetworkView: UIView {
         addSubview(imgV)
         addSubview(btnLoad)
         imgV.snp.makeConstraints { (make) in
-            make.width.height.equalTo(160)
+            make.width.height.equalTo(150)
             make.centerX.equalTo(self)
             make.centerY.equalTo(self).offset(-50)
         }
