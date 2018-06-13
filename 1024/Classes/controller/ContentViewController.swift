@@ -41,7 +41,9 @@ class ContentViewController: UIViewController {
     }
     
     fileprivate lazy var containerWV: WKWebView  = {
-        let wv = WKWebView()
+        let conf = WKWebViewConfiguration()
+        conf.allowsInlineMediaPlayback = true
+        let wv = WKWebView(frame: CGRect.zero, configuration: conf)
         wv.isOpaque = false
         wv.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
         //滚动流程

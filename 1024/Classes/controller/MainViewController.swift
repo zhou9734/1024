@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import SVProgressHUD
+import SwiftSoup
 
 class MainViewController: UIViewController{
     fileprivate var dataCell: [[ConfModel]] = [[ConfModel]]()
@@ -21,19 +23,17 @@ class MainViewController: UIViewController{
         setupUI()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     fileprivate func setupUI() {
         self.title = "草榴社區"
-        self.view.addSubview(tbl)
-        tbl.snp.makeConstraints { (make) in
+        self.view.addSubview(self.tbl)
+        self.tbl.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top)
             make.left.equalTo(self.view.snp.left)
             make.right.equalTo(self.view.snp.right)
             make.bottom.equalTo(self.view.snp.bottom)
         }
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.leftBtn)
+        SVProgressHUD.setDefaultMaskType(.black)
     }
     
     fileprivate func initData(){
@@ -42,6 +42,14 @@ class MainViewController: UIViewController{
         dataCell.append(enjoyCell!)
         dataCell.append(movieCell!)
     }
+    
+    fileprivate lazy var leftBtn: UIButton = {
+        let btn = UIButton()
+//        btn.setBackgroundImage(UIImage(named: "menu"), for: .normal)
+        btn.setTitle("回家", for: .normal)
+        btn.addTarget(self, action: #selector(MainViewController.reback), for: .touchUpInside)
+        return btn
+    }()
     
     fileprivate lazy var tbl: UITableView = {
         let tv = UITableView(frame: CGRect(), style: .plain)
@@ -52,7 +60,9 @@ class MainViewController: UIViewController{
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
-    
+    @objc fileprivate func reback(){
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
