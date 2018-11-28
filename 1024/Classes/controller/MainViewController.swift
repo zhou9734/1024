@@ -32,7 +32,7 @@ class MainViewController: UIViewController{
             make.right.equalTo(self.view.snp.right)
             make.bottom.equalTo(self.view.snp.bottom)
         }
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.leftBtn)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.leftBtn)
         SVProgressHUD.setDefaultMaskType(.black)
     }
     
@@ -45,9 +45,10 @@ class MainViewController: UIViewController{
     
     fileprivate lazy var leftBtn: UIButton = {
         let btn = UIButton()
-//        btn.setBackgroundImage(UIImage(named: "menu"), for: .normal)
         btn.setTitle("回家", for: .normal)
+        btn.setTitleColor(UIColor.white, for: .normal)
         btn.addTarget(self, action: #selector(MainViewController.reback), for: .touchUpInside)
+        btn.sizeToFit()
         return btn
     }()
     
@@ -61,7 +62,12 @@ class MainViewController: UIViewController{
         return tv
     }()
     @objc fileprivate func reback(){
-        
+        SVProgressHUD.showInfo(withStatus: "获取地址中...")
+        NetworkTool.sharedInstance.getHomeUrl(){ (url) in
+            let rootUrl = "http://" + url! + "/"
+            CommonTools.setUrl(url: rootUrl)
+            SVProgressHUD.dismiss()
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

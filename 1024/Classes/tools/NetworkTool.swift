@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class NetworkTool: NSObject {
     let rootUrl = CommonTools.getDefaultUrl()
@@ -42,6 +43,22 @@ class NetworkTool: NSObject {
                     finished(str, nil)
                 }else{
                     finished(nil, response.error)
+                }
+            }
+        }
+    }
+    
+    func getHomeUrl(finished : @escaping (_ response : String?)->()){
+        let urlString = "https://get.xunfs.com/app/listapp.php"
+        let params = ["a": "get18", "system": "ios"];
+        NetworkTool.sharedSessionManager.request(urlString, method: HTTPMethod.post	, parameters: params).response { (response) in
+            if response.error != nil{
+            }else{
+                if let data = response.data{
+                    let enc = CFStringConvertEncodingToNSStringEncoding(UInt32(CFStringEncodings.GB_18030_2000.rawValue))
+                    let str : String = NSString(data: data, encoding: enc)! as String
+                    let json = JSON.init(parseJSON: str)
+                    finished(json["url1"].string!)
                 }
             }
         }

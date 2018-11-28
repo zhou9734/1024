@@ -9,18 +9,15 @@
 import UIKit
 class CommonTools {
     static func getDefaultUrl() -> String {
-        var url = UserDefaults.standard.string(forKey: "CLURL")
-        if url == nil {
-            url = "http://www.t66y.com/"
-            UserDefaults.standard.set(url, forKey: "CLURL")
-        }
-        return url!
+        return "http://www.t66y.com/"
     }
     
     static func setUrl(url: String?) {
-        if url != nil{
+        if url == nil{
+            UserDefaults.standard.set("http://www.t66y.com/", forKey: "CLURL")
+        }else{
             UserDefaults.standard.set(url, forKey: "CLURL")
-        }
+        }        
     }
 }
 

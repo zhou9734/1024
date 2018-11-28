@@ -9,6 +9,7 @@ target '1024' do
   pod 'SVProgressHUD'
   pod 'MJRefresh'
   pod 'SwiftSoup'
+  pod 'SwiftyJSON', '~> 3.1.3'
 # Pods for 1024
  
 end
