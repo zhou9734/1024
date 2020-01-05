@@ -41,7 +41,7 @@ class NoNetworkView: UIView {
     
     fileprivate lazy var btnLoad: UIButton = {
         let btn = UIButton()
-        btn.setTitle("马山重试", for: .normal)
+        btn.setTitle("马上重试", for: .normal)
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.backgroundColor = UIColor.orange

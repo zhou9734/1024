@@ -32,7 +32,7 @@ class MainViewController: UIViewController{
             make.right.equalTo(self.view.snp.right)
             make.bottom.equalTo(self.view.snp.bottom)
         }
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.leftBtn)
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.leftBtn)
         SVProgressHUD.setDefaultMaskType(.black)
     }
     
