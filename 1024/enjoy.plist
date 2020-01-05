@@ -3,6 +3,10 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>articleCount</key>
+		<string>3546748</string>
+		<key>topicCount</key>
+		<string>11000</string>
 		<key>icon</key>
 		<string>jishutaolun</string>
 		<key>title</key>
@@ -13,6 +17,10 @@
 		<string>thread0806.php?fid=7</string>
 	</dict>
 	<dict>
+		<key>topicCount</key>
+		<string>11234</string>
+		<key>articleCount</key>
+		<string>7484723</string>
 		<key>icon</key>
 		<string>xinshidaidewomen</string>
 		<key>title</key>
@@ -23,6 +31,10 @@
 		<string>thread0806.php?fid=8</string>
 	</dict>
 	<dict>
+		<key>topicCount</key>
+		<string>16988</string>
+		<key>articleCount</key>
+		<string>2019883</string>
 		<key>icon</key>
 		<string>dagaier</string>
 		<key>title</key>
@@ -33,6 +45,10 @@
 		<string>thread0806.php?fid=16</string>
 	</dict>
 	<dict>
+		<key>topicCount</key>
+		<string>1951</string>
+		<key>articleCount</key>
+		<string>210987</string>
 		<key>icon</key>
 		<string>chengrenwenxue</string>
 		<key>title</key>

@@ -12,10 +12,6 @@ import MJRefresh
 import SVProgressHUD
 import SwiftSoup
 
-protocol NoNetworkProtocal {
-    func reload()
-}
-
 class BlockViewController: UIViewController {
     let blockCellIdentifier = "blockCellIdentifier"
     var blockModels: [BlockModel] = [BlockModel]()
@@ -25,7 +21,7 @@ class BlockViewController: UIViewController {
             if let _conf = confiModel{
                 self.title = _conf.title
                 self.url = _conf.url!
-                self.page = 2
+                self.page = 1
             }
         }
     }
@@ -33,7 +29,7 @@ class BlockViewController: UIViewController {
     let header = MJRefreshNormalHeader()
     //下拉加载
     let footer = MJRefreshBackNormalFooter()
-    var page = 2
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -92,13 +88,12 @@ class BlockViewController: UIViewController {
         tv.register(BlockListTableCell.self, forCellReuseIdentifier: blockCellIdentifier)
         tv.dataSource = self
         tv.delegate = self
-        tv.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
     fileprivate lazy var noNetworkView: UIView = {
         let v = NoNetworkView(frame: self.view.bounds)
-        v.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
+        v.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1), darkColor: nil)
         v.delege = self
         return v
     }()

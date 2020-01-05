@@ -30,7 +30,6 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
         self.title = "草榴社區"
         SVProgressHUD.setDefaultMaskType(.black)
-        self.view.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
         self.view.addSubview(containerWV)
         containerWV.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top)
@@ -45,9 +44,10 @@ class ContentViewController: UIViewController {
         conf.allowsInlineMediaPlayback = true
         let wv = WKWebView(frame: CGRect.zero, configuration: conf)
         wv.isOpaque = false
-        wv.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
-        //滚动流程
+        wv.scrollView.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1), darkColor: nil)
+        //滚动流畅
         wv.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+        wv.navigationDelegate = self
         return wv
     }()
     
@@ -72,6 +72,47 @@ class ContentViewController: UIViewController {
             self.containerWV.loadHTMLString(containerDivStr, baseURL: nil)
             SVProgressHUD.dismiss()
         }
+    }
+    
+    fileprivate func changeColor(){
+        if #available(iOS 13.0, *) {
+           if self.traitCollection.userInterfaceStyle == .dark{
+               self.changeTextBackgroundStyle(style: "dark")
+           } else {
+               self.changeTextBackgroundStyle(style: "light")
+           }
+       }
+    }
+    
+    fileprivate func changeTextBackgroundStyle(style : String = "dark"){
+        if style == "dark" {
+            //字体颜色
+            self.containerWV.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#F8F8FF'", completionHandler: nil)
+            //背景颜色
+            self.containerWV.evaluateJavaScript("document.body.style.backgroundColor=\"#1E1E1E\"", completionHandler: nil)
+        }else{
+            self.containerWV.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#5E5E5E'", completionHandler: nil)
+            self.containerWV.evaluateJavaScript("document.body.style.backgroundColor=\"#F9F9EC\"", completionHandler: nil)
+        }
+    }
+}
+
+extension ContentViewController: WKNavigationDelegate{
+    // 页面加载完成之后调用
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+        SVProgressHUD.dismiss()
+        changeColor()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            //判断模式
+            if traitCollection.userInterfaceStyle == .dark {
+                changeTextBackgroundStyle(style: "dark")
+            }else {
+                changeTextBackgroundStyle(style: "light")
+           }
+       }
     }
 }
 

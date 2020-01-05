@@ -36,3 +36,23 @@ func alert(msg: String,this: UIViewController){
     alert.addAction(UIAlertAction(title: nil, style: .default, handler: nil))
     this.present(alert, animated: true, completion: nil)
 }
+
+func getDarkModeBGColor(_ defalutColor: UIColor, darkColor: UIColor?) -> UIColor {
+    if #available(iOS 13.0, *) {
+        let bgColor = UIColor { (traitCollection) -> UIColor in
+            switch traitCollection.userInterfaceStyle {
+            case .light:
+                return defalutColor
+            case .dark:
+                if let d = darkColor {
+                    return d
+                }
+                return UIColor.black
+            default:
+                fatalError()
+            }
+        }
+        return bgColor
+    }
+    return defalutColor
+}

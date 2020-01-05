@@ -30,7 +30,7 @@ class BlockListTableCell: UITableViewCell {
     }
     
     fileprivate func setupUI(){
-        self.contentView.backgroundColor = UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1)
+        self.contentView.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1), darkColor: nil)
         self.contentView.addSubview(titleLbl)
         self.contentView.addSubview(createUserLbl)
         self.contentView.addSubview(replyLbl)
@@ -57,7 +57,7 @@ class BlockListTableCell: UITableViewCell {
     
     fileprivate lazy var titleLbl: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = UIColor(displayP3Red: 58/255, green: 76/255, blue: 163/255, alpha: 1)
+        lbl.textColor = getDarkModeBGColor(UIColor(displayP3Red: 47/255, green: 96/255, blue: 168/255, alpha: 1), darkColor: UIColor.white)
         lbl.font = UIFont.systemFont(ofSize: 17)
         lbl.numberOfLines = 0
         lbl.translatesAutoresizingMaskIntoConstraints = false

@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 import SVProgressHUD
 import SwiftSoup
+import MJRefresh
+
+protocol NoNetworkProtocal {
+    func reload()
+}
 
 class MainViewController: UIViewController{
     fileprivate var dataCell: [[ConfModel]] = [[ConfModel]]()
@@ -32,7 +37,6 @@ class MainViewController: UIViewController{
             make.right.equalTo(self.view.snp.right)
             make.bottom.equalTo(self.view.snp.bottom)
         }
-        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.leftBtn)
         SVProgressHUD.setDefaultMaskType(.black)
     }
     
@@ -43,32 +47,16 @@ class MainViewController: UIViewController{
         dataCell.append(movieCell!)
     }
     
-    fileprivate lazy var leftBtn: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("回家", for: .normal)
-        btn.setTitleColor(UIColor.white, for: .normal)
-        btn.addTarget(self, action: #selector(MainViewController.reback), for: .touchUpInside)
-        btn.sizeToFit()
-        return btn
-    }()
-    
     fileprivate lazy var tbl: UITableView = {
         let tv = UITableView(frame: CGRect(), style: .plain)
         tv.register(MainTableCell.self, forCellReuseIdentifier: identifier)
         tv.dataSource = self
         tv.delegate = self
-        tv.backgroundColor = UIColor.white
+//        tv.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1), darkColor: nil)
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
-    @objc fileprivate func reback(){
-        SVProgressHUD.showInfo(withStatus: "获取地址中...")
-        NetworkTool.sharedInstance.getHomeUrl(){ (url) in
-            let rootUrl = "http://" + url! + "/"
-            CommonTools.setUrl(url: rootUrl)
-            SVProgressHUD.dismiss()
-        }
-    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -95,7 +83,7 @@ extension MainViewController: UITableViewDataSource{
 }
 extension MainViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 80
     }
     //点击事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,6 +93,18 @@ extension MainViewController: UITableViewDelegate{
         let blockVC = BlockViewController()
         blockVC.confiModel = cellData
         self.navigationController?.pushViewController(blockVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 178/255, green: 211/255, blue: 225/255, alpha: 1), darkColor: UIColor(displayP3Red: 28/255, green: 27/255, blue: 32/255, alpha: 1))
+        let lbl = UILabel()
+        lbl.frame = CGRect(x: 10, y: 7, width: 200, height: 15)
+        lbl.text = header[section] //UIColor(displayP3Red: 2/255, green: 75/255, blue: 125/255, alpha: 1)
+        lbl.textColor = getDarkModeBGColor(UIColor(displayP3Red: 2/255, green: 75/255, blue: 125/255, alpha: 1), darkColor: UIColor.white)
+        lbl.font = UIFont.systemFont(ofSize: 17)
+        view.addSubview(lbl)
+        return view
     }
 }
 

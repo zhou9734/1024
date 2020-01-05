@@ -44,7 +44,7 @@ class NoNetworkView: UIView {
         btn.setTitle("马上重试", for: .normal)
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        btn.backgroundColor = UIColor.orange
+        btn.backgroundColor = getDarkModeBGColor(UIColor.orange, darkColor: UIColor(displayP3Red: 28/255, green: 27/255, blue: 32/255, alpha: 1))
         btn.addTarget(self, action: #selector(NoNetworkView.reloadData), for: .touchUpInside)
         return btn
     }()
