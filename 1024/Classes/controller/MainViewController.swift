@@ -52,7 +52,7 @@ class MainViewController: UIViewController{
         tv.register(MainTableCell.self, forCellReuseIdentifier: identifier)
         tv.dataSource = self
         tv.delegate = self
-//        tv.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1), darkColor: nil)
+        tv.backgroundColor = getDarkModeBGColor(UIColor(displayP3Red: 247/255, green: 252/255, blue: 236/255, alpha: 1), darkColor: nil)
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
