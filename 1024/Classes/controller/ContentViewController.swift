@@ -16,12 +16,13 @@ import MJRefresh
 class ContentViewController: UIViewController {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
-    var header = "<!DOCTYPE html><html lang=\"en\"><head><title></title><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><link rel=\"stylesheet\" href=\"http://www.viidii.info/web/mob_style.css?v=2.0233\" type=\"text/css\"><style type=\"text/css\" abt=\"234\"></style></head><body><div style=\"padding:15px;\" class=\"f18\">"
+    var header = "<!DOCTYPE html><html lang=\"en\"><head><title></title><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><link rel=\"stylesheet\" href=\"http://www.viidii.info/web/mob_style.css?v=2.0233\" type=\"text/css\"><style type=\"text/css\" abt=\"234\"></style></head><body "
+    var header2 = " ><div style=\"padding:15px;\" class=\"f18\">"
     let footer = "</body></html>"
     var blockModel: BlockModel?{
         didSet{
             if let data = blockModel{
-                header = header + data.title + "</div> <div style=\"margin:0 0 20px 0;height: 1px;transform: scaleY(0.333333);background: #cccccc;\"></div><div class=\"tpc_cont\" style=\"padding:15px 15px 0px 15px;clear:both;\">"
+                header2 = header2 + data.title + "</div> <div style=\"margin:0 0 20px 0;height: 1px;transform: scaleY(0.333333);background: #cccccc;\"></div><div class=\"tpc_cont\" style=\"padding:15px 15px 0px 15px;clear:both;\">"
                 getPageData(urlStr: data.url)
             }
         }
@@ -58,6 +59,7 @@ class ContentViewController: UIViewController {
             if error != nil || result == nil{
                 SVProgressHUD.dismiss()
                 SVProgressHUD.showError(withStatus: "网络错误,请重新打开")
+                self.navigationController?.popViewController(animated: true)
                 return
             }
             let doc: Document = try! SwiftSoup.parse(result!)
@@ -65,13 +67,26 @@ class ContentViewController: UIViewController {
             if "" == containerDivStr{
                 SVProgressHUD.dismiss()
                 SVProgressHUD.showError(withStatus: "网络错误,请重新打开")
+                self.navigationController?.popViewController(animated: true)
                 return
             }
             containerDivStr = containerDivStr.replacingOccurrences(of: "data-src", with: "src")
-            containerDivStr = self.header + containerDivStr + "</div>" + self.footer
+            containerDivStr = self.header + self.bodyColor() + self.header2 + containerDivStr + "</div>" + self.footer
             self.containerWV.loadHTMLString(containerDivStr, baseURL: nil)
             SVProgressHUD.dismiss()
         }
+    }
+    
+    fileprivate func bodyColor() -> String{
+        var bodyColor = ""
+        if #available(iOS 13.0, *) {
+            if self.traitCollection.userInterfaceStyle == .dark{
+                bodyColor = " style=\"background-color: #1E1E1E;-webkit-text-fill-color: #F8F8FF;\" "
+            } else {
+                bodyColor = " style=\"background-color: #F9F9EC;-webkit-text-fill-color: #5E5E5E;\" "
+            }
+        }
+        return bodyColor
     }
     
     fileprivate func changeColor(){
