@@ -7,9 +7,11 @@
 //
 
 import UIKit
+let SCREEN_WIDTH = UIScreen.main.bounds.width
+let SCREEN_HEIGHT = UIScreen.main.bounds.height
 class CommonTools {
     static func getDefaultUrl() -> String {
-        return "http://www.t66y.com/"
+        return UserDefaults.standard.string(forKey: "CLURL") ?? "http://www.t66y.com/"
     }
     
     static func setUrl(url: String?) {

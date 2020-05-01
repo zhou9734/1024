@@ -22,6 +22,10 @@ class MainViewController: UIViewController{
     fileprivate var movieCell: [ConfModel]?
     fileprivate let identifier = "tableIdentifier"
     let header:[String] = ["草榴休閑區", "电影区"]
+    //数组用于添加菜单选项
+    lazy var menuArr:[PopMenu] = [PopMenu]()
+    lazy var menuView:POPMenuView = POPMenuView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initData()
@@ -38,6 +42,7 @@ class MainViewController: UIViewController{
             make.bottom.equalTo(self.view.snp.bottom)
         }
         SVProgressHUD.setDefaultMaskType(.black)
+        addRightBtn()
     }
     
     fileprivate func initData(){
@@ -45,6 +50,17 @@ class MainViewController: UIViewController{
         movieCell = ConfModel.loadData(fileName: "movie")
         dataCell.append(enjoyCell!)
         dataCell.append(movieCell!)
+    }
+    
+    fileprivate func addRightBtn(){
+        let rightBtnItem = UIBarButtonItem(image: UIImage(named: "menu"), landscapeImagePhone: UIImage(named: "menu"), style: .plain, target: self, action: #selector(self.rightBtnClick))
+        self.navigationItem.rightBarButtonItem = rightBtnItem
+        createMenuArr()
+    }
+    
+    func createMenuArr(){
+        self.menuArr.append(PopMenu(icon: "setting", title: "设置地址"))
+        self.menuArr.append(PopMenu(icon: "setting", title: "设置默认"))
     }
     
     fileprivate lazy var tbl: UITableView = {
@@ -56,6 +72,64 @@ class MainViewController: UIViewController{
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
+    
+    @objc func rightBtnClick(){
+        self.menuView = POPMenuView.initWith(dataArray: self.menuArr, origin: CGPoint.init(x: SCREEN_WIDTH - 20, y: 100), size: CGSize.init(width: 130, height: 44), direction: POPMenueDirection.right)
+        self.menuView.delegate = self
+        self.menuView.pop()
+    }
+    
+    internal func POPMenuViewDidSelectedAt(index: Int) {
+        print("点击了第\(index)个")
+        switch index {
+            case 0:
+                popSettingUrl()
+                break
+            case 1:
+                CommonTools.setUrl(url: "http://www.t66y.com/")
+                break
+            default: break
+        }
+        self.menuView.dismiss()
+    }
+    
+    fileprivate func popSettingUrl(){
+        let alertController = UIAlertController(title: "修改地址", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addTextField(configurationHandler: { (textField: UITextField!) -> Void in
+            textField.placeholder = "请输入地址"
+            // 添加监听代码，监听文本框变化时要做的操作
+            NotificationCenter.default.addObserver(self, selector: #selector(self.alertTextFieldDidChange), name: NSNotification.Name.UITextFieldTextDidChange, object: textField)
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确认", style: UIAlertActionStyle.default , handler: { (action: UIAlertAction!) -> Void in
+            let okText = (alertController.textFields?.first)! as UITextField
+            var url = "http://www.t66y.com/";
+            if let str = okText.text {
+                url = str
+            }
+            CJLog(message: url)
+            CommonTools.setUrl(url: url)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+        })
+        okAction.isEnabled = false
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    /// 监听文字改变
+    @objc func alertTextFieldDidChange(){
+        let alertController = self.presentedViewController as! UIAlertController?
+        if (alertController != nil) {
+            let login = (alertController!.textFields?.first)! as UITextField
+            let okAction = alertController!.actions.last! as UIAlertAction
+            if (!(login.text?.isEmpty)!) {
+                okAction.isEnabled = true
+            } else {
+                okAction.isEnabled = false
+            }
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,5 +180,9 @@ extension MainViewController: UITableViewDelegate{
         view.addSubview(lbl)
         return view
     }
+}
+
+extension MainViewController: POPMenuViewDelegate{
+   
 }
 

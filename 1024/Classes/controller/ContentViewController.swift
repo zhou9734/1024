@@ -16,7 +16,7 @@ import MJRefresh
 class ContentViewController: UIViewController {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
-    var header = "<!DOCTYPE html><html lang=\"en\"><head><title></title><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><link rel=\"stylesheet\" href=\"http://www.viidii.info/web/mob_style.css?v=2.0233\" type=\"text/css\"><style type=\"text/css\" abt=\"234\"></style></head><body "
+    var header = "<!DOCTYPE html><html lang=\"en\"><head><title></title><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><script src=\"//www.viidii.info/web/mob_post.js?v=2.0316\" charset=\"UTF-8\"></script><link rel=\"stylesheet\" href=\"http://www.viidii.info/web/mob_style.css?v=2.0316\" type=\"text/css\"><style type=\"text/css\" abt=\"234\"></style></head><body "
     var header2 = " ><div style=\"padding:15px;\" class=\"f18\">"
     let footer = "</body></html>"
     var blockModel: BlockModel?{
@@ -70,9 +70,10 @@ class ContentViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
                 return
             }
-            containerDivStr = containerDivStr.replacingOccurrences(of: "data-src", with: "src")
+            containerDivStr = containerDivStr.replacingOccurrences(of: "ess-data", with: "src")
             containerDivStr = self.header + self.bodyColor() + self.header2 + containerDivStr + "</div>" + self.footer
             self.containerWV.loadHTMLString(containerDivStr, baseURL: nil)
+            CJLog(message: containerDivStr)
             SVProgressHUD.dismiss()
         }
     }
@@ -128,6 +129,20 @@ extension ContentViewController: WKNavigationDelegate{
                 changeTextBackgroundStyle(style: "light")
            }
        }
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        //先注释,如果地址改成https就放开
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            if challenge.previousFailureCount == 0 {
+                let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+                completionHandler(URLSession.AuthChallengeDisposition.useCredential,credential)
+            }else{
+                completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge,nil)
+            }
+        } else {
+            completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge,nil)
+        }
     }
 }
 
