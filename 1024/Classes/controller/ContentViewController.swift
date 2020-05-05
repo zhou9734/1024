@@ -16,7 +16,7 @@ import MJRefresh
 class ContentViewController: UIViewController {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
-    var header = "<!DOCTYPE html><html lang=\"en\"><head><title></title><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><script src=\"//www.viidii.info/web/mob_post.js?v=2.0316\" charset=\"UTF-8\"></script><link rel=\"stylesheet\" href=\"http://www.viidii.info/web/mob_style.css?v=2.0316\" type=\"text/css\"><style type=\"text/css\" abt=\"234\"></style></head><body "
+    var header = "<!DOCTYPE html><html lang=\"en\"><head><title></title><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"></script><link rel=\"stylesheet\" href=\"http://www.viidii.info/web/mob_style.css?v=2.0316\" type=\"text/css\"><style type=\"text/css\" abt=\"234\"></style></head><body "
     var header2 = " ><div style=\"padding:15px;\" class=\"f18\">"
     let footer = "</body></html>"
     var blockModel: BlockModel?{
@@ -73,7 +73,6 @@ class ContentViewController: UIViewController {
             containerDivStr = containerDivStr.replacingOccurrences(of: "ess-data", with: "src")
             containerDivStr = self.header + self.bodyColor() + self.header2 + containerDivStr + "</div>" + self.footer
             self.containerWV.loadHTMLString(containerDivStr, baseURL: nil)
-            CJLog(message: containerDivStr)
             SVProgressHUD.dismiss()
         }
     }
